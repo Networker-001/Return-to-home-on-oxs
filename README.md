@@ -93,7 +93,7 @@ RTD=120; RTS=8; SAVE
 
 ---
 
-## Einrichtung im Sender (EdgeTX / OpenTX)
+## Beispiel Einrichtung im Sender (EdgeTX / OpenTX)
 
 oXs überträgt das Lenksignal über den Standard-Telemetriewert **`HEADING` (`Hdg`)** im Bereich von `0` bis `100` (wobei **`50.0` genau Geradeaus / Neutral** entspricht).
 
