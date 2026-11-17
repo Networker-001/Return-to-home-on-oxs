@@ -119,7 +119,7 @@ Add a mixer line controlled by your **RTH Switch** (using **Multiplex: Add** so 
 
 ## Installing the Firmware
 
-1. Download the matching firmware file for your radio protocol (e.g., **`RTH_CRSF.uf2`** for ELRS/CRSF) from the [Releases](../../releases) page.
+1. Download the matching firmware file for your radio protocol (e.g., **`RTH_CRSF.uf2`** for ELRS/CRSF) from the [config](https://github.com/Networker-001/oXs_on_RP2040-add-ons/tree/main/config) page.
 2. Hold the **BOOT** button on the RP2040 board while connecting it to your PC via USB.
 3. Copy the downloaded `.uf2` file onto the `RPI-RP2` drive that appears.
 4. Open **CoolTerm**, check or customize your parameters (such as `RTD` and `RTS`), and save changes with `SAVE`.
