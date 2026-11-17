@@ -25,9 +25,9 @@ Im Gegensatz zu ausgewachsenen Autopiloten (wie INAV oder ArduPilot) bleibt dies
 ## Hardware-Aufbau & Testträger
 
 ![Hardware Übersicht](images/setup_overview.jpg)
-*Typischer Aufbau: RP2040-Zero, GPS-Modul und MPU6050-Gyrosensor.*
+*Typischer Aufbau: RP2040-Zero, GPS-Modul .*
 
-![RC-Car Testträger](images/rc_car_test.jpg)
+![RC-Car Testträger](images/RTH_Car.jpg)
 *Gefahrloser Bodentest: Überprüfung von Kreisradius und Lenkrichtung auf einem RC-Car.*
 
 ---
