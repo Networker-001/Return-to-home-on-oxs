@@ -37,7 +37,10 @@ Unlike full autopilots (such as INAV or ArduPilot), this RTH extension keeps thi
 ![Flight Path Diagram](images/rth_flight_path.png)
 *The model approaches the Home circle on a straight tangent line and smoothly enters a clockwise orbit.*
 
-1. **Automatic Home Lock:** After powering on, oXs waits for a solid GPS fix and automatically saves your launch position as the **Home point**.
+1. **Automatic Home Lock (`Sats` Telemetry Status):** After powering on, oXs monitors GPS reception and indicates the current lock status by adding an offset to the **`Sats`** telemetry field:
+   * **Below `50`:** Waiting for a valid 3D GPS fix.
+   * **`50` and above (`50` + satellite count, e.g., `58`):** Valid GPS fix acquired – the 9-second stability timer is running.
+   * **`100` and above (`100` + satellite count, `106` or higher):** After 9 seconds of stable reception, the launch position is saved as the **Home point** and RTH is ready.
 2. **Activating RTH:** When you flip the RTH switch on your transmitter, oXs calculates the exact course back to a virtual circle around your Home point.
 3. **Smooth Approach & Orbit:** Your model turns toward the edge of the circle, flies straight toward it, and smoothly transitions into a **continuous clockwise orbit** around you until you switch RTH off or take over with the sticks.
 
@@ -77,6 +80,8 @@ Add a mixer line controlled by your **RTH Switch** (using **Multiplex: Add** so 
 > **Important Direction Check Before Takeoff:**  
 > Once GPS Home-Lock is active, walk about `15–20 m` away from your starting point. Walk forward at a brisk pace, flip the RTH switch, and check that the rudder deflects to steer the model in a **clockwise** turn back toward Home. If it steers the wrong way, simply invert the `+` / `-` sign of the mixer weight.
 
+> **Important Direction Check Before Takeoff:**  
+> Wait until the **`Sats`** telemetry field shows a **value of `106` or higher**
 ---
 
 ## Installing the Firmware
