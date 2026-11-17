@@ -38,7 +38,10 @@ Im Gegensatz zu ausgewachsenen Autopiloten (wie INAV oder ArduPilot) bleibt dies
 ![Flugbahn Diagramm](images/rth_flight_path.png)
 *Das Modell steuert den Zielkreis tangential an und geht ohne Überschwingen in einen Rechtskreis über.*
 
-1. **Automatischer Home-Punkt:** Nach dem Einschalten wartet oXs auf einen stabilen GPS-Empfang und speichert den Startpunkt automatisch als **Home-Position**.
+1. **Automatischer Home-Punkt (Anzeige im Feld `Sats`):** Nach dem Einschalten prüft oXs den GPS-Empfang und zeigt den Status direkt durch einen Offset im Telemetriefeld **`Sats`** an:
+   * **Unter `50`:** Noch kein stabiler 3D-Fix.
+   * **Ab `50` (`50` + Satellitenanzahl, z. B. `58`):** Stabiler GPS-Fix erkannt – der 9-Sekunden-Countdown zum Speichern läuft.
+   * **Ab `100` (`100` + Satellitenanzahl, ab `106`):** Nach 9 Sekunden stabilem Empfang ist der Startpunkt als **Home-Position** gespeichert und RTH ist startklar.
 2. **RTH aktivieren:** Legst du im Flug den RTH-Schalter am Sender um, berechnet oXs den optimalen Kurs zurück zu einem virtuellen Kreis um deinen Standort.
 3. **Anflug und Kreisen:** Das Modell dreht auf die Kreisbahn ein, fliegt geradlinig darauf zu und geht weich in einen **kontinuierlichen Rechtskreis** über dem Startpunkt über – so lange, bis du RTH wieder ausschaltest oder selbst steuerst.
 
