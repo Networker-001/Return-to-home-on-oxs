@@ -27,7 +27,7 @@ Unlike full autopilots (such as INAV or ArduPilot), this RTH extension keeps thi
 ![Hardware Overview](images/setup_overview.jpg)
 *Typical setup: RP2040-Zero, GPS module, and MPU6050 gyro sensor.*
 
-![RC Car Testbed](images/rc_car_test.jpg)
+![RC Car Testbed](images/RTH_Car.jpg)
 *Safe ground testing: Verifying the RTH circle radius and steering direction on an RC car.*
 
 ---
