@@ -82,8 +82,6 @@ You can adjust existing settings at any time and separate multiple commands with
 | `PRI=<Pin>` | RC channel input from receiver | Only needed if oXs also drives servos or the onboard gyro (otherwise disabled) |
 | `GPS_TX=<Pin>` | TX pin to GPS module (connect to GPS RX) | Default: `15` (GPIO 15) |
 | `GPS_RX=<Pin>` | RX pin from GPS module (connect to GPS TX) | Default: `17` (GPIO 17) |
-| `SDA=<Pin>` | I2C SDA (for baro / MPU6050) | Optional, e.g., `2` (GPIO 2) |
-| `SCL=<Pin>` | I2C SCL (for baro / MPU6050) | Optional, e.g., `3` (GPIO 3) |
 | `RTD=<meters>` | **Target Orbit Radius** around Home | RC Car (Test): `3`–`5` m \| Glider / Plane: `100`–`150` m |
 | `RTS=<km/h>` | **Minimum Speed** for steering updates | RC Car (Test): `1`–`3` km/h \| Glider / Plane: `5`–`12` km/h |
 | `SAVE` | **Save all settings permanently** | Power cycle or reset the RP2040 after sending `SAVE` |
