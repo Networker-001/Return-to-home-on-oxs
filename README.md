@@ -79,7 +79,7 @@ Füge in den Mischern für Seite und Quer jeweils eine Zeile hinzu, die über de
 > Lege die Mischer-Gewichtung für das Seitenruder beim ersten Testflug auf einen Drehgeber oder seitlichen Schieber (z. B. `S1` / `LS`). So kannst du im Flug stufenlos testen, ab welchem Ausschlag das Modell ruhig und ohne Aufschaukeln kreist, und den ermittelten Wert danach fest im Mischer eintragen.
 
 > **Wichtiger Wirkrichtungstest vor dem Start:**  
-> Warte, bis der GPS-Home-Punkt gespeichert ist, und gehe ca. `15–20 m` vom Startpunkt weg. Gehe zügig vorwärts, lege den RTH-Schalter um und prüfe, ob das Seitenruder so ausschlägt, dass das Modell eine **Rechtskurve** zurück zum Startpunkt einleitet. Lenkt es in die falsche Richtung, drehe einfach das Vorzeichen (`+` / `-`) bei der Mischer-Gewichtung um.
+> Warte, bis im Telemetriefeld **`Sats`** ein **Wert ab `106`** angezeigt wird (Home-Position nach 9 Sekunden gespeichert), und gehe ca. `15–20 m` vom Startpunkt weg. Gehe zügig vorwärts, lege den RTH-Schalter um und prüfe, ob das Seitenruder so ausschlägt, dass das Modell eine **Rechtskurve** zurück zum Startpunkt einleitet. Lenkt es in die falsche Richtung, drehe einfach das Vorzeichen (`+` / `-`) bei der Mischer-Gewichtung um.
 
 ---
 
