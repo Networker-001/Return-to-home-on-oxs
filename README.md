@@ -118,7 +118,7 @@ Füge in den Mischern für Seite und Quer jeweils eine Zeile hinzu, die über de
 ---
 ## Firmware aufspielen
 
-1. Lade die passende Firmware-Datei für dein System (z. B. **`RTH_CRSF.uf2`** für ELRS/CRSF) unter [Releases](../../releases) herunter.
+1. Lade die passende Firmware-Datei für dein System (z. B. **`RTH_CRSF.uf2`** für ELRS/CRSF) unter [config](https://github.com/Networker-001/oXs_on_RP2040-add-ons/tree/main/config) herunter.
 2. Halte die **BOOT-Taste** auf dem RP2040-Board gedrückt, während du es per USB mit dem PC verbindest.
 3. Kopiere die heruntergeladene `.uf2`-Datei einfach auf das neu erscheinende Laufwerk `RPI-RP2`.
 4. Öffne **CoolTerm**, prüfe oder passe die Werte (wie `RTD` und `RTS`) an und speichere Änderungen mit `SAVE`.
