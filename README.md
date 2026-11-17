@@ -34,7 +34,7 @@ Im Gegensatz zu ausgewachsenen Autopiloten (wie INAV oder ArduPilot) bleibt dies
 
 ## So funktioniert der Rückflug in der Praxis
 
-![Flugbahn Diagramm](images/rth_flight_path.png)
+![Flugbahn Diagramm](images/approach.jpg)
 *Das Modell steuert den Zielkreis tangential an und geht ohne Überschwingen in einen Rechtskreis über.*
 
 1. **Automatischer Home-Punkt (Anzeige im Feld `Sats`):** Nach dem Einschalten prüft oXs den GPS-Empfang und zeigt den Status direkt durch einen Offset im Telemetriefeld **`Sats`** an:
