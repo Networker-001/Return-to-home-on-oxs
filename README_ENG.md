@@ -6,7 +6,7 @@ A simple, **low-cost Return-to-Home (RTH) system** based on the **Raspberry Pi R
 
 > **Source Code Repository:**  
 > The full source code is maintained in the central project repository:  
-> **[Networker-001/oXs_on_RP2040-add-ons](https://github.com/Networker-001/oXs_on_RP2040-add-ons)**
+> **[Networker-001/oXs_on_RP2040-add-ons](https://github.com)**
 
 ---
 
@@ -46,23 +46,54 @@ Unlike full autopilots (such as INAV or ArduPilot), this RTH extension keeps thi
 
 ---
 
-## Basic Configuration (USB Terminal)
+## Pre-Configured Firmware & Customization
 
-For configuring the RP2040 via USB, we recommend the free, user-friendly serial terminal **[CoolTerm](https://freeware.the-meiers.org/)** (available for Windows, macOS, and Linux). It requires no installation and makes copying and pasting configuration commands effortless.
+The provided pre-compiled firmware builds are named according to the pre-configured receiver protocol (e.g., **`RTH_CRSF.uf2`** for ELRS / CRSF), allowing you to get started immediately without compiling the code yourself. GPIO 16 remains free for the onboard RGB LED of the RP2040-Zero.
 
-**Quick Setup for CoolTerm:**
+### Factory Default Pinout (Example: `RTH_CRSF.uf2`)
+
+| Function | Code Definition (`config.h`) | RP2040 GPIO Pin | Terminal Command |
+| :--- | :--- | :--- | :--- |
+| **Telemetry Output (TLM)** | `_pinTlm 0X00` | **GPIO 0** | `TLM=0` |
+| **GPS TX (RP2040 TX to GPS RX)** | `_pinGpsTx 0X0F` | **GPIO 15** | `GPS_TX=15` |
+| **GPS RX (GPS TX to RP2040 RX)** | `_pinGpsRx 0X11` | **GPIO 17** | `GPS_RX=17` |
+| **Receiver Protocol** | `_protocol 'C'` | **ELRS / CRSF** | `PROTOCOL=C` |
+| **Primary RC Input (PRI)** | `_pinPrimIn 0XFF` | Disabled | `PRI=255` |
+| **INAV LTM Input** | `_inav_ltm 0XFF` | Disabled | — |
+
+---
+
+## Full Configuration via USB Terminal (CoolTerm)
+
+For configuring the RP2040 via USB, we recommend the free, user-friendly serial terminal **[CoolTerm](https://the-meiers.org)** (available for Windows, macOS, and Linux). It requires no installation and makes copying and pasting configuration commands effortless.
+
+### Quick Setup for CoolTerm
 1. Connect the RP2040 to your PC via USB and open **CoolTerm**.
 2. Click **Options**, select your COM port under *Serial Port*, and set the baud rate to **`115200`** (`8-N-1`).
 3. Switch to the **Terminal** tab on the left and set *Enter Key Emulation* to **`CR+LF`** (required for oXs to recognize commands).
 4. Click **OK**, then click **Connect**, and press **Enter** once to display the current configuration.
 
-In addition to your standard oXs pin configuration, set just these two RTH parameters:
+### Complete Reference of Relevant Commands
 
-| Command | Meaning | Recommended for RC Car | Recommended for Glider / Plane |
-| :--- | :--- | :--- | :--- |
-| `RTD=<meters>` | **Orbit Radius** around Home | `3` to `5` (meters) | `100` to `150` (meters) |
-| `RTS=<km/h>` | **Minimum Speed** for steering updates | `1` to `3` (km/h) | `5` to `12` (km/h) |
-| `SAVE` | **Save settings** permanently | — | — |
+You can adjust existing settings at any time and separate multiple commands with `;`:
+
+| Command | Meaning | Recommendation / Notes |
+| :--- | :--- | :--- |
+| `PROTOCOL=<Type>` | Receiver protocol | `C` = ELRS/CRSF (Default), `S` = FrSky S.Port, `F` = FrSky FBus, `J` = Jeti Ex, `H` = HoTT |
+| `TLM=<Pin>` | Telemetry pin to receiver | Default: `0` (GPIO 0) |
+| `PRI=<Pin>` | RC channel input from receiver | Only needed if oXs also drives servos or the onboard gyro (otherwise disabled) |
+| `GPS_TX=<Pin>` | TX pin to GPS module (connect to GPS RX) | Default: `15` (GPIO 15) |
+| `GPS_RX=<Pin>` | RX pin from GPS module (connect to GPS TX) | Default: `17` (GPIO 17) |
+| `SDA=<Pin>` | I2C SDA (for baro / MPU6050) | Optional, e.g., `2` (GPIO 2) |
+| `SCL=<Pin>` | I2C SCL (for baro / MPU6050) | Optional, e.g., `3` (GPIO 3) |
+| `RTD=<meters>` | **Target Orbit Radius** around Home | RC Car (Test): `3`–`5` m \| Glider / Plane: `100`–`150` m |
+| `RTS=<km/h>` | **Minimum Speed** for steering updates | RC Car (Test): `1`–`3` km/h \| Glider / Plane: `5`–`12` km/h |
+| `SAVE` | **Save all settings permanently** | Power cycle or reset the RP2040 after sending `SAVE` |
+
+**Example of a customization in the terminal (e.g., glider with 120 m radius and 8 km/h minimum speed):**
+```text
+RTD=120; RTS=8; SAVE
+```
 
 ---
 
@@ -86,15 +117,14 @@ Add a mixer line controlled by your **RTH Switch** (using **Multiplex: Add** so 
 > Assign the rudder mixer weight to a potentiometer or side slider (e.g., `S1` / `LS`) during your first test flights. This lets you smoothly dial in the ideal turn authority in the air without oscillation, and save the final percentage afterward.
 
 > **Important Direction Check Before Takeoff:**  
-> Once GPS Home-Lock is active, walk about `15–20 m` away from your starting point. Walk forward at a brisk pace, flip the RTH switch, and check that the rudder deflects to steer the model in a **clockwise** turn back toward Home. If it steers the wrong way, simply invert the `+` / `-` sign of the mixer weight.
+> Wait until the **`Sats`** telemetry field shows a **value of `106` or higher** (Home point saved after 9 seconds), then walk about `15–20 m` away from your starting point. Walk forward at a brisk pace, flip the RTH switch, and check that the rudder deflects to steer the model in a **clockwise** turn back toward Home. If it steers the wrong way, simply invert the `+` / `-` sign of the mixer weight.
 
-> **Important Direction Check Before Takeoff:**  
-> Wait until the **`Sats`** telemetry field shows a **value of `106` or higher**
 ---
 
 ## Installing the Firmware
 
-1. Download **`oXs.uf2`** from the [Releases](../../releases) page.
+1. Download the matching firmware file for your radio protocol (e.g., **`RTH_CRSF.uf2`** for ELRS/CRSF) from the [Releases](../../releases) page.
 2. Hold the **BOOT** button on the RP2040 board while connecting it to your PC via USB.
-3. Copy `oXs.uf2` onto the `RPI-RP2` drive that appears.
-4. Open a serial terminal, enter your pins, `RTD`, and `RTS`, and type `SAVE`.
+3. Copy the downloaded `.uf2` file onto the `RPI-RP2` drive that appears.
+4. Open **CoolTerm**, check or customize your parameters (such as `RTD` and `RTS`), and save changes with `SAVE`.
+
