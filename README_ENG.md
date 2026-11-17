@@ -24,8 +24,6 @@ Unlike full autopilots (such as INAV or ArduPilot), this RTH extension keeps thi
 
 ## Hardware Setup & Test Platform
 
-*(Upload your photos to an `images/` folder in this repository to display them here)*
-
 ![Hardware Overview](images/setup_overview.jpg)
 *Typical setup: RP2040-Zero, GPS module, and MPU6050 gyro sensor.*
 
