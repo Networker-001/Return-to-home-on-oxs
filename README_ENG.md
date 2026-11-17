@@ -48,7 +48,15 @@ Unlike full autopilots (such as INAV or ArduPilot), this RTH extension keeps thi
 
 ## Basic Configuration (USB Terminal)
 
-Connect the RP2040 to your PC via USB (`115200 baud`, CR/LF enabled) and set just two RTH parameters in addition to your normal oXs pin configuration:
+For configuring the RP2040 via USB, we recommend the free, user-friendly serial terminal **[CoolTerm](https://freeware.the-meiers.org/)** (available for Windows, macOS, and Linux). It requires no installation and makes copying and pasting configuration commands effortless.
+
+**Quick Setup for CoolTerm:**
+1. Connect the RP2040 to your PC via USB and open **CoolTerm**.
+2. Click **Options**, select your COM port under *Serial Port*, and set the baud rate to **`115200`** (`8-N-1`).
+3. Switch to the **Terminal** tab on the left and set *Enter Key Emulation* to **`CR+LF`** (required for oXs to recognize commands).
+4. Click **OK**, then click **Connect**, and press **Enter** once to display the current configuration.
+
+In addition to your standard oXs pin configuration, set just these two RTH parameters:
 
 | Command | Meaning | Recommended for RC Car | Recommended for Glider / Plane |
 | :--- | :--- | :--- | :--- |
