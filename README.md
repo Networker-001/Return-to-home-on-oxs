@@ -6,7 +6,7 @@ Ein einfaches, **kostengünstiges Return-to-Home (RTH) System** auf Basis des **
 
 > **Zentraler Quellcode:**  
 > Den vollständigen Programmcode für dieses Projekt findest du im Haupt-Repository:  
-> **[Networker-001/oXs_on_RP2040-add-ons](https://github.com)**
+> **[Networker-001/oXs_on_RP2040-add-ons](https://github.com/Networker-001/oXs_on_RP2040-add-ons)**
 
 ---
 
