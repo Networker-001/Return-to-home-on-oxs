@@ -49,7 +49,15 @@ Im Gegensatz zu ausgewachsenen Autopiloten (wie INAV oder ArduPilot) bleibt dies
 
 ## Grundeinstellung am PC (USB-Terminal)
 
-Verbinde den RP2040 per USB-Kabel mit dem PC (`115200 Baud`, CR/LF aktiv) und stelle zusätzlich zu deiner gewohnten oXs-Pinbelegung nur zwei Werte ein:
+Für die Konfiguration über USB empfehlen wir das kostenlose und einsteigerfreundliche Programm **[CoolTerm](https://freeware.the-meiers.org/)** (verfügbar für Windows, macOS und Linux). Es erfordert keine Installation und ermöglicht das bequeme Einfügen von Befehlen per Kopieren und Einfügen.
+
+**Kurzanleitung für CoolTerm:**
+1. Verbinde den RP2040 per USB-Kabel mit dem PC und starte **CoolTerm**.
+2. Klicke auf **Options** und wähle unter *Serial Port* den passenden COM-Port mit **`115200` Baud** (`8-N-1`) aus.
+3. Wechsle links im Menü auf **Terminal** und stelle *Enter Key Emulation* auf **`CR+LF`** (wichtig, damit oXs die Befehle erkennt).
+4. Klicke auf **OK** und danach oben auf **Connect**. Drücke einmal **Enter**, um die aktuelle Konfiguration anzuzeigen.
+
+Stelle zusätzlich zu deiner gewohnten oXs-Pinbelegung nur diese zwei Werte ein:
 
 | Befehl | Bedeutung | Empfehlung RC-Car (Test) | Empfehlung Segler / Motormodell |
 | :--- | :--- | :--- | :--- |
