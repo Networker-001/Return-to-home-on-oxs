@@ -34,7 +34,7 @@ Unlike full autopilots (such as INAV or ArduPilot), this RTH extension keeps thi
 
 ## How It Works in Practice
 
-![Flight Path Diagram](images/rth_flight_path.png)
+![Flight Path](images/approach.jpg)
 *The model approaches the Home circle on a straight tangent line and smoothly enters a clockwise orbit.*
 
 1. **Automatic Home Lock (`Sats` Telemetry Status):** After powering on, oXs monitors GPS reception and indicates the current lock status by adding an offset to the **`Sats`** telemetry field:
