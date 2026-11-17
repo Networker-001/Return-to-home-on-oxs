@@ -57,9 +57,7 @@ The provided pre-compiled firmware builds are named according to the pre-configu
 | **Telemetry Output (TLM)** | `_pinTlm 0X00` | **GPIO 0** | `TLM=0` |
 | **GPS TX (RP2040 TX to GPS RX)** | `_pinGpsTx 0X0F` | **GPIO 15** | `GPS_TX=15` |
 | **GPS RX (GPS TX to RP2040 RX)** | `_pinGpsRx 0X11` | **GPIO 17** | `GPS_RX=17` |
-| **Receiver Protocol** | `_protocol 'C'` | **ELRS / CRSF** | `PROTOCOL=C` |
-| **Primary RC Input (PRI)** | `_pinPrimIn 0XFF` | Disabled | `PRI=255` |
-| **INAV LTM Input** | `_inav_ltm 0XFF` | Disabled | — |
+| **Receiver Protocol** | `_protocol 'C'` | **ELRS / CRSF** | `PROTOCOL=C` | — |
 
 ---
 
