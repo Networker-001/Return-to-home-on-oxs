@@ -24,7 +24,6 @@ Im Gegensatz zu ausgewachsenen Autopiloten (wie INAV oder ArduPilot) bleibt dies
 
 ## Hardware-Aufbau & Testträger
 
-*(Lade deine Bilder in einen Ordner `images/` in diesem Repository hoch, damit sie hier angezeigt werden)*
 
 ![Hardware Übersicht](images/setup_overview.jpg)
 *Typischer Aufbau: RP2040-Zero, GPS-Modul und MPU6050-Gyrosensor.*
