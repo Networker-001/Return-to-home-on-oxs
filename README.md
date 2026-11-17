@@ -6,7 +6,7 @@ Ein einfaches, **kostengünstiges Return-to-Home (RTH) System** auf Basis des **
 
 > **Zentraler Quellcode:**  
 > Den vollständigen Programmcode für dieses Projekt findest du im Haupt-Repository:  
-> **[Networker-001/oXs_on_RP2040-add-ons](https://github.com/Networker-001/oXs_on_RP2040-add-ons)**
+> **[Networker-001/oXs_on_RP2040-add-ons](https://github.com)**
 
 ---
 
@@ -23,7 +23,6 @@ Im Gegensatz zu ausgewachsenen Autopiloten (wie INAV oder ArduPilot) bleibt dies
 ---
 
 ## Hardware-Aufbau & Testträger
-
 
 ![Hardware Übersicht](images/setup_overview.jpg)
 *Typischer Aufbau: RP2040-Zero, GPS-Modul und MPU6050-Gyrosensor.*
@@ -47,23 +46,54 @@ Im Gegensatz zu ausgewachsenen Autopiloten (wie INAV oder ArduPilot) bleibt dies
 
 ---
 
-## Grundeinstellung am PC (USB-Terminal)
+## Vorkonfigurierte Firmware & Anpassung
 
-Für die Konfiguration über USB empfehlen wir das kostenlose und einsteigerfreundliche Programm **[CoolTerm](https://freeware.the-meiers.org/)** (verfügbar für Windows, macOS und Linux). Es erfordert keine Installation und ermöglicht das bequeme Einfügen von Befehlen per Kopieren und Einfügen.
+Die hier bereitgestellten Firmware-Dateien sind bereits nach dem jeweiligen Empfängerprotokoll vorkonfiguriert (z. B. **`RTH_CRSF.uf2`** für ELRS / CRSF), sodass du ohne eigenes Kompilieren sofort starten kannst. GPIO 16 bleibt dabei frei für die interne RGB-LED des RP2040-Zero.
 
-**Kurzanleitung für CoolTerm:**
+### Werkseitige Standard-Belegung (Beispiel `RTH_CRSF.uf2`)
+
+| Funktion | Code-Definition (`config.h`) | RP2040 GPIO-Pin | Terminal-Befehl |
+| :--- | :--- | :--- | :--- |
+| **Telemetrie-Ausgang (TLM)** | `_pinTlm 0X00` | **GPIO 0** | `TLM=0` |
+| **GPS TX (vom RP2040 zum GPS RX)** | `_pinGpsTx 0X0F` | **GPIO 15** | `GPS_TX=15` |
+| **GPS RX (vom GPS TX zum RP2040)** | `_pinGpsRx 0X11` | **GPIO 17** | `GPS_RX=17` |
+| **Empfänger-Protokoll** | `_protocol 'C'` | **ELRS / CRSF** | `PROTOCOL=C` |
+| **Primärer RC-Eingang (PRI)** | `_pinPrimIn 0XFF` | Deaktiviert | `PRI=255` |
+| **INAV LTM Eingang** | `_inav_ltm 0XFF` | Deaktiviert | — |
+
+---
+
+## Komplette Konfiguration am PC (USB-Terminal)
+
+Für Anpassungen über USB empfehlen wir das kostenlose und einsteigerfreundliche Programm **[CoolTerm](https://the-meiers.org)** (verfügbar für Windows, macOS und Linux). Es erfordert keine Installation und ermöglicht das bequeme Einfügen von Befehlen per Kopieren und Einfügen.
+
+### Kurzanleitung für CoolTerm
 1. Verbinde den RP2040 per USB-Kabel mit dem PC und starte **CoolTerm**.
-2. Klicke auf **Options** und wähle unter *Serial Port* den passenden COM-Port mit **`115200` Baud** (`8-N-1`) aus.
+2. Klicke auf **Options**, wähle unter *Serial Port* den passenden COM-Port mit **`115200` Baud** (`8-N-1`) aus.
 3. Wechsle links im Menü auf **Terminal** und stelle *Enter Key Emulation* auf **`CR+LF`** (wichtig, damit oXs die Befehle erkennt).
 4. Klicke auf **OK** und danach oben auf **Connect**. Drücke einmal **Enter**, um die aktuelle Konfiguration anzuzeigen.
 
-Stelle zusätzlich zu deiner gewohnten oXs-Pinbelegung nur diese zwei Werte ein:
+### Übersicht aller relevanten Konfigurationsbefehle
 
-| Befehl | Bedeutung | Empfehlung RC-Car (Test) | Empfehlung Segler / Motormodell |
-| :--- | :--- | :--- | :--- |
-| `RTD=<Meter>` | **Ziel-Kreisradius** um den Startpunkt | `3` bis `5` (Meter) | `100` bis `150` (Meter) |
-| `RTS=<km/h>` | **Mindestgeschwindigkeit** für Lenkbefehle | `1` bis `3` (km/h) | `5` bis `12` (km/h) |
-| `SAVE` | **Einstellungen dauerhaft speichern** | — | — |
+Bestehende Werte lassen sich jederzeit anpassen und mehrere Befehle mit `;` kombinieren:
+
+| Befehl | Bedeutung | Empfehlung / Hinweise |
+| :--- | :--- | :--- |
+| `PROTOCOL=<Typ>` | Empfänger-Protokoll | `C` = ELRS/CRSF (Standard), `S` = FrSky S.Port, `F` = FrSky FBus, `J` = Jeti Ex, `H` = HoTT |
+| `TLM=<Pin>` | Telemetrie-Pin zum Empfänger | Standard: `0` (GPIO 0) |
+| `PRI=<Pin>` | RC-Kanal-Eingang vom Empfänger | Nur nötig, wenn oXs auch Servos oder den internen Gyro steuern soll (sonst deaktiviert) |
+| `GPS_TX=<Pin>` | TX-Pin zum GPS-Modul (an GPS RX) | Standard: `15` (GPIO 15) |
+| `GPS_RX=<Pin>` | RX-Pin vom GPS-Modul (an GPS TX) | Standard: `17` (GPIO 17) |
+| `SDA=<Pin>` | I2C SDA (für Baro / MPU6050) | Optional, z. B. `2` (GPIO 2) |
+| `SCL=<Pin>` | I2C SCL (für Baro / MPU6050) | Optional, z. B. `3` (GPIO 3) |
+| `RTD=<Meter>` | **Ziel-Kreisradius** um den Startpunkt | RC-Car (Test): `3`–`5` m \| Segler / Motormodell: `100`–`150` m |
+| `RTS=<km/h>` | **Mindestgeschwindigkeit** für Lenkbefehle | RC-Car (Test): `1`–`3` km/h \| Segler / Motormodell: `5`–`12` km/h |
+| `SAVE` | **Einstellungen dauerhaft speichern** | Nach `SAVE` den RP2040 einmal neu starten (Strom trennen / Reset) |
+
+**Beispiel für eine Anpassung im Terminal (z. B. Segler mit 120 m Radius und 8 km/h Mindestgeschwindigkeit):**
+```text
+RTD=120; RTS=8; SAVE
+```
 
 ---
 
@@ -90,10 +120,10 @@ Füge in den Mischern für Seite und Quer jeweils eine Zeile hinzu, die über de
 > Warte, bis im Telemetriefeld **`Sats`** ein **Wert ab `106`** angezeigt wird (Home-Position nach 9 Sekunden gespeichert), und gehe ca. `15–20 m` vom Startpunkt weg. Gehe zügig vorwärts, lege den RTH-Schalter um und prüfe, ob das Seitenruder so ausschlägt, dass das Modell eine **Rechtskurve** zurück zum Startpunkt einleitet. Lenkt es in die falsche Richtung, drehe einfach das Vorzeichen (`+` / `-`) bei der Mischer-Gewichtung um.
 
 ---
-
 ## Firmware aufspielen
 
-1. Lade die fertige Firmware-Datei **`oXs.uf2`** unter [Releases](../../releases) herunter.
+1. Lade die passende Firmware-Datei für dein System (z. B. **`RTH_CRSF.uf2`** für ELRS/CRSF) unter [Releases](../../releases) herunter.
 2. Halte die **BOOT-Taste** auf dem RP2040-Board gedrückt, während du es per USB mit dem PC verbindest.
-3. Kopiere die Datei `oXs.uf2` einfach auf das neu erscheinende Laufwerk `RPI-RP2`.
-4. Öffne ein serielles Terminal, gib deine Pins sowie `RTD` und `RTS` ein und speichere mit `SAVE`.
+3. Kopiere die heruntergeladene `.uf2`-Datei einfach auf das neu erscheinende Laufwerk `RPI-RP2`.
+4. Öffne **CoolTerm**, prüfe oder passe die Werte (wie `RTD` und `RTS`) an und speichere Änderungen mit `SAVE`.
+
