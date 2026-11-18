@@ -93,6 +93,15 @@ RTD=120; RTS=8; SAVE
 
 ---
 
+## Installing the Firmware
+
+1. Download the matching firmware file for your radio protocol (e.g., **`RTH_CRSF.uf2`** for ELRS/CRSF) from the [config](https://github.com/Networker-001/oXs_on_RP2040-add-ons/tree/main/config) page.
+2. Hold the **BOOT** button on the RP2040 board while connecting it to your PC via USB.
+3. Copy the downloaded `.uf2` file onto the `RPI-RP2` drive that appears.
+4. Open **CoolTerm**, check or customize your parameters (such as `RTD` and `RTS`), and save changes with `SAVE`.
+
+---
+
 ## Transmitter Setup (EdgeTX / OpenTX)
 
 oXs transmits the steering command through the standard **`HEADING` (`Hdg`)** telemetry sensor (`0` to `100`, where **`50.0` is neutral / straight ahead**).
@@ -115,12 +124,10 @@ Add a mixer line controlled by your **RTH Switch** (using **Multiplex: Add** so 
 > **Important Direction Check Before Takeoff:**  
 > Wait until the **`Sats`** telemetry field shows a **value of `106` or higher** (Home point saved after 9 seconds), then walk about `15–20 m` away from your starting point. Walk forward at a brisk pace, flip the RTH switch, and check that the rudder deflects to steer the model in a **clockwise** turn back toward Home. If it steers the wrong way, simply invert the `+` / `-` sign of the mixer weight.
 
----
+### Optional: EdgeTX Color Screen Widget (e.g., RadioMaster TX16S)
 
-## Installing the Firmware
+For EdgeTX transmitters equipped with a color display (such as the RadioMaster TX16S), a dedicated **GPS Homer Widget** is available to visualize your model's position, heading, and distance relative to the Home point directly on your radio screen:
 
-1. Download the matching firmware file for your radio protocol (e.g., **`RTH_CRSF.uf2`** for ELRS/CRSF) from the [config](https://github.com/Networker-001/oXs_on_RP2040-add-ons/tree/main/config) page.
-2. Hold the **BOOT** button on the RP2040 board while connecting it to your PC via USB.
-3. Copy the downloaded `.uf2` file onto the `RPI-RP2` drive that appears.
-4. Open **CoolTerm**, check or customize your parameters (such as `RTD` and `RTS`), and save changes with `SAVE`.
+* **Widget Download & Setup:** **[EdgeTX GPS Homer Widget (Networker-001/Widgets)](https://github.com/Networker-001/Widgets/tree/main/EdgeTX/GPS%20Homer)**
+
 
