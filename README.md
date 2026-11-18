@@ -24,7 +24,7 @@ Im Gegensatz zu ausgewachsenen Autopiloten (wie INAV oder ArduPilot) bleibt dies
 
 ## Hardware-Aufbau & Testträger
 
-![Hardware Übersicht](images/setup_overview.jpg)
+![Hardware Übersicht](/Aufbau.md)
 *Typischer Aufbau: RP2040-Zero, GPS-Modul .*
 
 ![RC-Car Testträger](images/RTH_Car.jpg)
