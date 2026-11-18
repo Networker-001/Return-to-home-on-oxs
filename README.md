@@ -55,9 +55,10 @@ Die hier bereitgestellten Firmware-Dateien sind bereits nach dem jeweiligen Empf
 | Funktion | Code-Definition (`config.h`) | RP2040 GPIO-Pin | Terminal-Befehl |
 | :--- | :--- | :--- | :--- |
 | **Telemetrie-Ausgang (TLM)** | `_pinTlm 0X00` | **GPIO 0** | `TLM=0` |
-| **GPS TX (vom RP2040 zum GPS RX)** | `_pinGpsTx 0X0F` | **GPIO 15** | `GPS_TX=15` |
-| **GPS RX (vom GPS TX zum RP2040)** | `_pinGpsRx 0X11` | **GPIO 17** | `GPS_RX=17` |
+| **GPS TX (vom RP2040 zum GPS RX)** | `_pinGpsTx 0X1C` | **GPIO 28** | `GPS_TX=28` |
+| **GPS RX (vom GPS TX zum RP2040)** | `_pinGpsRx 0X1D` | **GPIO 29** | `GPS_RX=29` |
 | **Empfänger-Protokoll** | `_protocol 'C'` | **ELRS / CRSF** | `PROTOCOL=C` | — |
+
 
 ---
 
@@ -80,8 +81,8 @@ Bestehende Werte lassen sich jederzeit anpassen und mehrere Befehle mit `;` komb
 | `PROTOCOL=<Typ>` | Empfänger-Protokoll | `C` = ELRS/CRSF (Standard), `S` = FrSky S.Port, `F` = FrSky FBus, `J` = Jeti Ex, `H` = HoTT |
 | `TLM=<Pin>` | Telemetrie-Pin zum Empfänger | Standard: `0` (GPIO 0) |
 | `PRI=<Pin>` | RC-Kanal-Eingang vom Empfänger | Nur nötig, wenn oXs auch Servos oder den internen Gyro steuern soll (sonst deaktiviert) |
-| `GPS_TX=<Pin>` | TX-Pin zum GPS-Modul (an GPS RX) | Standard: `15` (GPIO 15) |
-| `GPS_RX=<Pin>` | RX-Pin vom GPS-Modul (an GPS TX) | Standard: `17` (GPIO 17) |
+| `GPS_TX=<Pin>` | TX-Pin zum GPS-Modul (an GPS RX) | Standard: `28` (GPIO 28) |
+| `GPS_RX=<Pin>` | RX-Pin vom GPS-Modul (an GPS TX) | Standard: `29` (GPIO 29) |
 | `RTD=<Meter>` | **Ziel-Kreisradius** um den Startpunkt | RC-Car (Test): `3`–`5` m \| Segler / Motormodell: `100`–`150` m |
 | `RTS=<km/h>` | **Mindestgeschwindigkeit** für Lenkbefehle | RC-Car (Test): `1`–`3` km/h \| Segler / Motormodell: `5`–`12` km/h |
 | `SAVE` | **Einstellungen dauerhaft speichern** | Nach `SAVE` den RP2040 einmal neu starten (Strom trennen / Reset) |
