@@ -14,7 +14,7 @@ Ein einfaches, **kostengünstiges Return-to-Home (RTH) System** auf Basis des **
 
 Im Gegensatz zu ausgewachsenen Autopiloten (wie INAV oder ArduPilot) bleibt dieses RTH-System bewusst überschaubar und transparent:
 
-* **Kostengünstige Hardware:** Ein kleiner RP2040-Mikrocontroller (z. B. RP2040-Zero für wenige Euro), ein einfaches GPS-Modul und ein Gyrosensor (MPU6050) genügen.
+* **Kostengünstige Hardware:** Ein kleiner RP2040-Mikrocontroller (z. B. RP2040-Zero für wenige Euro), umd ein einfaches GPS-Modul genügen.
 * **Stabilisierung erforderlich:** Das System benötigt eine grundlegende Fluglagestabilisierung – entweder über den **integrierten MPU6050-Gyro** von oXs oder über einen **stabilisierten Empfänger** (z. B. FrSky S6R/S8R, Jeti Assist, Lemon RX etc.).
 * **Die Hauptsteuerung bleibt im Sender:** oXs greift **nicht** direkt in die Servos ein. Stattdessen sendet oXs lediglich eine Lenkempfehlung per Telemetrie (`HEADING`) an den Sender. Alle Mischer, Servowege und der jederzeitige manuelle Eingriff über die Steuerknüppel bleiben sicher im Sender.
 * **Mischung von Seitenruder und Querruder:** Im Sender wird das RTH-Signal sanft auf das **Seitenruder** (und leicht auf das **Querruder** zur Unterstützung der Kurvenlage) gemischt, während der Stabi das Modell sauber in der Waage hält.
