@@ -90,7 +90,12 @@ Bestehende Werte lassen sich jederzeit anpassen und mehrere Befehle mit `;` komb
 ```text
 RTD=120; RTS=8; SAVE
 ```
+## Firmware aufspielen
 
+1. Lade die passende Firmware-Datei für dein System (z. B. **`RTH_CRSF.uf2`** für ELRS/CRSF) unter [config](https://github.com/Networker-001/oXs_on_RP2040-add-ons/tree/main/config) herunter.
+2. Halte die **BOOT-Taste** auf dem RP2040-Board gedrückt, während du es per USB mit dem PC verbindest.
+3. Kopiere die heruntergeladene `.uf2`-Datei einfach auf das neu erscheinende Laufwerk `RPI-RP2`.
+4. Öffne **CoolTerm**, prüfe oder passe die Werte (wie `RTD` und `RTS`) an und speichere Änderungen mit `SAVE`.
 ---
 
 ## Beispiel Einrichtung im Sender (EdgeTX / OpenTX)
@@ -116,10 +121,8 @@ Füge in den Mischern für Seite und Quer jeweils eine Zeile hinzu, die über de
 > Warte, bis im Telemetriefeld **`Sats`** ein **Wert ab `106`** angezeigt wird (Home-Position nach 9 Sekunden gespeichert), und gehe ca. `15–20 m` vom Startpunkt weg. Gehe zügig vorwärts, lege den RTH-Schalter um und prüfe, ob das Seitenruder so ausschlägt, dass das Modell eine **Rechtskurve** zurück zum Startpunkt einleitet. Lenkt es in die falsche Richtung, drehe einfach das Vorzeichen (`+` / `-`) bei der Mischer-Gewichtung um.
 
 ---
-## Firmware aufspielen
+### Optional: EdgeTX Farbdisplay-Widget (z. B. RadioMaster TX16S)
 
-1. Lade die passende Firmware-Datei für dein System (z. B. **`RTH_CRSF.uf2`** für ELRS/CRSF) unter [config](https://github.com/Networker-001/oXs_on_RP2040-add-ons/tree/main/config) herunter.
-2. Halte die **BOOT-Taste** auf dem RP2040-Board gedrückt, während du es per USB mit dem PC verbindest.
-3. Kopiere die heruntergeladene `.uf2`-Datei einfach auf das neu erscheinende Laufwerk `RPI-RP2`.
-4. Öffne **CoolTerm**, prüfe oder passe die Werte (wie `RTD` und `RTS`) an und speichere Änderungen mit `SAVE`.
+Für EdgeTX-Sender mit Farbdisplay (wie die RadioMaster TX16S, TX12 MKII Color, Boxer Color etc.) steht ein passendes **GPS Homer Widget** zur Verfügung, das die aktuelle Position, Richtung und Entfernung zum Home-Punkt übersichtlich auf dem Sender-Bildschirm anzeigt:
 
+* **Widget-Download & Anleitung:** **[EdgeTX GPS Homer Widget (Networker-001/Widgets)](https://github.com/Networker-001/Widgets/tree/main/EdgeTX/GPS%20Homer)**
