@@ -55,8 +55,8 @@ The provided pre-compiled firmware builds are named according to the pre-configu
 | Function | Code Definition (`config.h`) | RP2040 GPIO Pin | Terminal Command |
 | :--- | :--- | :--- | :--- |
 | **Telemetry Output (TLM)** | `_pinTlm 0X00` | **GPIO 0** | `TLM=0` |
-| **GPS TX (RP2040 TX to GPS RX)** | `_pinGpsTx 0X0F` | **GPIO 15** | `GPS_TX=15` |
-| **GPS RX (GPS TX to RP2040 RX)** | `_pinGpsRx 0X11` | **GPIO 17** | `GPS_RX=17` |
+| **GPS TX (RP2040 TX to GPS RX)** | `_pinGpsTx 0X1C` | **GPIO 28** | `GPS_TX=28` |
+| **GPS RX (GPS TX to RP2040 RX)** | `_pinGpsRx 0X1D` | **GPIO 29** | `GPS_RX=29` |
 | **Receiver Protocol** | `_protocol 'C'` | **ELRS / CRSF** | `PROTOCOL=C` | — |
 
 ---
@@ -80,8 +80,8 @@ You can adjust existing settings at any time and separate multiple commands with
 | `PROTOCOL=<Type>` | Receiver protocol | `C` = ELRS/CRSF (Default), `S` = FrSky S.Port, `F` = FrSky FBus, `J` = Jeti Ex, `H` = HoTT |
 | `TLM=<Pin>` | Telemetry pin to receiver | Default: `0` (GPIO 0) |
 | `PRI=<Pin>` | RC channel input from receiver | Only needed if oXs also drives servos or the onboard gyro (otherwise disabled) |
-| `GPS_TX=<Pin>` | TX pin to GPS module (connect to GPS RX) | Default: `15` (GPIO 15) |
-| `GPS_RX=<Pin>` | RX pin from GPS module (connect to GPS TX) | Default: `17` (GPIO 17) |
+| `GPS_TX=<Pin>` | TX pin to GPS module (connect to GPS RX) | Default: `28` (GPIO 28) |
+| `GPS_RX=<Pin>` | RX pin from GPS module (connect to GPS TX) | Default: `29` (GPIO 29) |
 | `RTD=<meters>` | **Target Orbit Radius** around Home | RC Car (Test): `3`–`5` m \| Glider / Plane: `100`–`150` m |
 | `RTS=<km/h>` | **Minimum Speed** for steering updates | RC Car (Test): `1`–`3` km/h \| Glider / Plane: `5`–`12` km/h |
 | `SAVE` | **Save all settings permanently** | Power cycle or reset the RP2040 after sending `SAVE` |
