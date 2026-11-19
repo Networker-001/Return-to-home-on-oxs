@@ -50,15 +50,19 @@ Im Gegensatz zu ausgewachsenen Autopiloten (wie INAV oder ArduPilot) bleibt dies
 
 Die hier bereitgestellten Firmware-Dateien sind bereits nach dem jeweiligen Empfängerprotokoll vorkonfiguriert (z. B. **`RTH_CRSF.uf2`** für ELRS / CRSF), sodass du ohne eigenes Kompilieren sofort starten kannst. GPIO 16 bleibt dabei frei für die interne RGB-LED des RP2040-Zero.
 
+
 ### Werkseitige Standard-Belegung (Beispiel `RTH_CRSF.uf2`)
 
-| Funktion | Code-Definition (`config.h`) | RP2040 GPIO-Pin | Terminal-Befehl |
+| Funktion | Code-Definition (`config.h`) | RP2040 GPIO-Pin / Wert | Terminal-Befehl |
 | :--- | :--- | :--- | :--- |
 | **Telemetrie-Ausgang (TLM)** | `_pinTlm 0X00` | **GPIO 0** | `TLM=0` |
 | **GPS TX (vom RP2040 zum GPS RX)** | `_pinGpsTx 0X1C` | **GPIO 28** | `GPS_TX=28` |
 | **GPS RX (vom GPS TX zum RP2040)** | `_pinGpsRx 0X1D` | **GPIO 29** | `GPS_RX=29` |
-| **Empfänger-Protokoll** | `_protocol 'C'` | **ELRS / CRSF** | `PROTOCOL=C` | — |
-
+| **Empfänger-Protokoll** | `_protocol 'C'` | **ELRS / CRSF** | `PROTOCOL=C` |
+| **Ziel-Kreisradius (RTD)** | `_rth_radius 100` *(Standard)* | **60 m** | `RTD=60` |
+| **Mindestgeschwindigkeit (RTS)** | `_rth_min_speed 5` *(Standard)* | **5 km/h** | `RTS=5` |
+| **Primärer RC-Eingang (PRI)** | `_pinPrimIn 0XFF` | Deaktiviert | `PRI=255` |
+| **INAV LTM Eingang** | `_inav_ltm 0X00` | Deaktiviert | `CONV=0` |
 
 ---
 
@@ -83,13 +87,13 @@ Bestehende Werte lassen sich jederzeit anpassen und mehrere Befehle mit `;` komb
 | `PRI=<Pin>` | RC-Kanal-Eingang vom Empfänger | Nur nötig, wenn oXs auch Servos oder den internen Gyro steuern soll (sonst deaktiviert) |
 | `GPS_TX=<Pin>` | TX-Pin zum GPS-Modul (an GPS RX) | Standard: `28` (GPIO 28) |
 | `GPS_RX=<Pin>` | RX-Pin vom GPS-Modul (an GPS TX) | Standard: `29` (GPIO 29) |
-| `RTD=<Meter>` | **Ziel-Kreisradius** um den Startpunkt | RC-Car (Test): `3`–`5` m \| Segler / Motormodell: `100`–`150` m |
+| `RTD=<Meter>` | **Ziel-Kreisradius** um den Startpunkt | RC-Car (Test): `3`–`5` m \| Segler / Motormodell: `60`–`80` m |
 | `RTS=<km/h>` | **Mindestgeschwindigkeit** für Lenkbefehle | RC-Car (Test): `1`–`3` km/h \| Segler / Motormodell: `5`–`12` km/h |
 | `SAVE` | **Einstellungen dauerhaft speichern** | Nach `SAVE` den RP2040 einmal neu starten (Strom trennen / Reset) |
 
 **Beispiel für eine Anpassung im Terminal (z. B. Segler mit 120 m Radius und 8 km/h Mindestgeschwindigkeit):**
 ```text
-RTD=120; RTS=8; SAVE
+RTD=60; RTS=8; SAVE
 ```
 ## Firmware aufspielen
 
