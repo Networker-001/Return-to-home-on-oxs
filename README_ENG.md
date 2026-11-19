@@ -50,14 +50,18 @@ Unlike full autopilots (such as INAV or ArduPilot), this RTH extension keeps thi
 
 The provided pre-compiled firmware builds are named according to the pre-configured receiver protocol (e.g., **`RTH_CRSF.uf2`** for ELRS / CRSF), allowing you to get started immediately without compiling the code yourself. GPIO 16 remains free for the onboard RGB LED of the RP2040-Zero.
 
-### Factory Default Pinout (Example: `RTH_CRSF.uf2`)
+### Factory Default Pinout & Parameters (Example: `RTH_CRSF.uf2`)
 
-| Function | Code Definition (`config.h`) | RP2040 GPIO Pin | Terminal Command |
+| Function | Code Definition (`config.h`) | RP2040 GPIO Pin / Value | Terminal Command |
 | :--- | :--- | :--- | :--- |
 | **Telemetry Output (TLM)** | `_pinTlm 0X00` | **GPIO 0** | `TLM=0` |
 | **GPS TX (RP2040 TX to GPS RX)** | `_pinGpsTx 0X1C` | **GPIO 28** | `GPS_TX=28` |
 | **GPS RX (GPS TX to RP2040 RX)** | `_pinGpsRx 0X1D` | **GPIO 29** | `GPS_RX=29` |
-| **Receiver Protocol** | `_protocol 'C'` | **ELRS / CRSF** | `PROTOCOL=C` | — |
+| **Receiver Protocol** | `_protocol 'C'` | **ELRS / CRSF** | `PROTOCOL=C` |
+| **Target Orbit Radius (RTD)** | `_rth_radius 60` *(Default)* | **60 m** | `RTD=60` |
+| **Minimum Speed (RTS)** | `_rth_min_speed 5` *(Default)* | **5 km/h** | `RTS=5` |
+| **Primary RC Input (PRI)** | `_pinPrimIn 0XFF` | Disabled | `PRI=255` |
+| **INAV LTM Input / Converter** | `_inav_ltm 0X00` | Disabled | `CONV=0` |
 
 ---
 
