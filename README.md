@@ -50,7 +50,6 @@ Im Gegensatz zu ausgewachsenen Autopiloten (wie INAV oder ArduPilot) bleibt dies
 
 Die hier bereitgestellten Firmware-Dateien sind bereits nach dem jeweiligen Empfängerprotokoll vorkonfiguriert (z. B. **`RTH_CRSF.uf2`** für ELRS / CRSF), sodass du ohne eigenes Kompilieren sofort starten kannst. GPIO 16 bleibt dabei frei für die interne RGB-LED des RP2040-Zero.
 
-
 ### Werkseitige Standard-Belegung (Beispiel `RTH_CRSF.uf2`)
 
 | Funktion | Code-Definition (`config.h`) | RP2040 GPIO-Pin / Wert | Terminal-Befehl |
@@ -59,10 +58,10 @@ Die hier bereitgestellten Firmware-Dateien sind bereits nach dem jeweiligen Empf
 | **GPS TX (vom RP2040 zum GPS RX)** | `_pinGpsTx 0X1C` | **GPIO 28** | `GPS_TX=28` |
 | **GPS RX (vom GPS TX zum RP2040)** | `_pinGpsRx 0X1D` | **GPIO 29** | `GPS_RX=29` |
 | **Empfänger-Protokoll** | `_protocol 'C'` | **ELRS / CRSF** | `PROTOCOL=C` |
-| **Ziel-Kreisradius (RTD)** | `_rth_radius 100` *(Standard)* | **60 m** | `RTD=60` |
+| **Ziel-Kreisradius (RTD)** | `_rth_radius 60` *(Standard)* | **60 m** | `RTD=60` |
 | **Mindestgeschwindigkeit (RTS)** | `_rth_min_speed 5` *(Standard)* | **5 km/h** | `RTS=5` |
 | **Primärer RC-Eingang (PRI)** | `_pinPrimIn 0XFF` | Deaktiviert | `PRI=255` |
-| **INAV LTM Eingang** | `_inav_ltm 0X00` | Deaktiviert | `CONV=0` |
+| **INAV LTM Eingang / Konverter** | `_inav_ltm 0X00` | Deaktiviert | `CONV=0` |
 
 ---
 
