@@ -87,10 +87,10 @@ Bestehende Werte lassen sich jederzeit anpassen und mehrere Befehle mit `;` komb
 | `GPS_TX=<Pin>` | TX-Pin zum GPS-Modul (an GPS RX) | Standard: `28` (GPIO 28) |
 | `GPS_RX=<Pin>` | RX-Pin vom GPS-Modul (an GPS TX) | Standard: `29` (GPIO 29) |
 | `RTD=<Meter>` | **Ziel-Kreisradius** um den Startpunkt | RC-Car (Test): `3`–`5` m \| Segler / Motormodell: `60`–`80` m |
-| `RTS=<km/h>` | **Mindestgeschwindigkeit** für Lenkbefehle | RC-Car (Test): `1`–`3` km/h \| Segler / Motormodell: `5`–`12` km/h |
+| `RTS=<km/h>` | **Mindestgeschwindigkeit** für Lenkbefehle | RC-Car (Test): `1`–`3` km/h \| Segler / Motormodell: `3`–`12` km/h |
 | `SAVE` | **Einstellungen dauerhaft speichern** | Nach `SAVE` den RP2040 einmal neu starten (Strom trennen / Reset) |
 
-**Beispiel für eine Anpassung im Terminal (z. B. Segler mit 120 m Radius und 8 km/h Mindestgeschwindigkeit):**
+**Beispiel für eine Anpassung im Terminal (z. B. Segler mit 60 m Radius und 8 km/h Mindestgeschwindigkeit):**
 ```text
 RTD=60; RTS=8; SAVE
 ```
