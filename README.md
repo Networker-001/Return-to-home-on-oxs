@@ -16,7 +16,7 @@ Im Gegensatz zu ausgewachsenen Autopiloten (wie INAV oder ArduPilot) bleibt dies
 
 * **Kostengünstige Hardware:** Ein kleiner RP2040-Mikrocontroller (z. B. RP2040-Zero für wenige Euro), umd ein einfaches GPS-Modul genügen.
 * **Stabilisierung erforderlich:** Das System benötigt eine grundlegende Fluglagestabilisierung – entweder über den **optionalen MPU6050-Gyro** von oXs oder über einen **stabilisierten Empfänger** (z. B. FrSky S6R/S8R, Jeti Assist, Lemon RX etc.).
-* **Die Hauptsteuerung bleibt im Sender:** oXs greift **nicht** direkt in die Servos ein. Stattdessen sendet oXs lediglich eine Lenkempfehlung per Telemetrie (`HEADING`) an den Sender. Alle Mischer, Servowege und der jederzeitige manuelle Eingriff über die Steuerknüppel bleiben sicher im Sender.
+* **Die Hauptsteuerung bleibt im Sender:** oXs greift **nicht** direkt in die Servos ein. Stattdessen sendet oXs lediglich eine Lenkempfehlung per Telemetrie (`GPS BEARING`) an den Sender. Alle Mischer, Servowege und der jederzeitige manuelle Eingriff über die Steuerknüppel bleiben sicher im Sender.
 * **Mischung von Seitenruder und Querruder:** Im Sender wird das RTH-Signal sanft auf das **Seitenruder** (und leicht auf das **Querruder** zur Unterstützung der Kurvenlage) gemischt, während der Stabi das Modell sauber in der Waage hält.
 * **Gefahrlos mit einem RC-Car erprobbar:** Da die Kursberechnung am Boden exakt genauso funktioniert wie in der Luft, kannst du die gesamte Technik vor dem Erstflug auf einem **einfachen RC-Car** montieren und Wirkrichtung sowie Kreisradius in Ruhe auf der Wiese oder dem Parkplatz testen.
 
@@ -104,13 +104,13 @@ RTD=60; RTS=8; SAVE
 
 ## Beispiel Einrichtung im Sender (EdgeTX / OpenTX)
 
-oXs überträgt das Lenksignal über den Standard-Telemetriewert **`HEADING` (`Hdg`)** im Bereich von `0` bis `100` (wobei **`50.0` genau Geradeaus / Neutral** entspricht).
+oXs überträgt das Lenksignal über den Standard-Telemetriewert **`GPS Home Bearing` (`Bear`) oder im Feld Roll bei CRSF** im Bereich von `-180` bis `+180` (wobei **`0` genau Geradeaus / Neutral** entspricht). Parallel erfolgt die Übetragung im Sensor *Roll*
 
 ### Schritt 1: Telemetriesignal zentrieren (Inputs)
 Lege einen neuen Input an (z. B. `I:RTH`):
-* **Quelle:** `Hdg` (Telemetriesensor)
-* **Gewichtung:** `100%`
-* **Offset:** `-50%` *(Verschiebt den Neutralwert `50.0` auf exakt `0%` Knüppelmitte)*
+* **Quelle:** `Roll` (Telemetriesensor)
+* **Gewichtung:** `30%`
+* **Offset:** `0` *( auf exakt `0%` Knüppelmitte)*
 
 ### Schritt 2: Auf Seiten- und Querruder mischen (Mischer)
 Füge in den Mischern für Seite und Quer jeweils eine Zeile hinzu, die über deinen **RTH-Schalter** aktiviert wird (Mischertyp: **Addieren**, damit deine Knüppel jederzeit Vorrang haben):
