@@ -9,7 +9,7 @@ Ein einfaches, **kostengünstiges Return-to-Home (RTH) System** auf Basis des **
 > **[Networker-001/oXs_on_RP2040-add-ons](https://github.com/Networker-001/oXs_on_RP2040-add-ons)**
 > 
 > Die `FrSky_2_CRSF.uf2` Datei für dieses Projekt findest du im Config-Ordner:  
-> **[Networker-001/oXs_on_RP2040-add-ons/Config](https://github.com/Networker-001/oXs_on_RP2040-add-ons/Config)**
+> **[Networker-001/oXs_on_RP2040-add-ons/Config](https://github.com/Networker-001/oXs_on_RP2040-add-ons/tree/main/Config))**
 ---
 
 ## Das Grundprinzip: Einfach, sicher und günstig
