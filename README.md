@@ -6,7 +6,7 @@ Ein einfaches, **kostengünstiges Return-to-Home (RTH) System** auf Basis des **
 
 > **Zentraler Quellcode:**  
 > Den vollständigen Programmcode für dieses Projekt findest du im Haupt-Repository:  
-> **[Networker-001/oXs_on_RP2040-add-ons](https://github.com/Networker-001/oXs_on_RP2040-add-ons)**
+> **[Networker-001/oXs_on_RP2040-add-ons](https://github.com)**
 
 ---
 
@@ -14,9 +14,9 @@ Ein einfaches, **kostengünstiges Return-to-Home (RTH) System** auf Basis des **
 
 Im Gegensatz zu ausgewachsenen Autopiloten (wie INAV oder ArduPilot) bleibt dieses RTH-System bewusst überschaubar und transparent:
 
-* **Kostengünstige Hardware:** Ein kleiner RP2040-Mikrocontroller (z. B. RP2040-Zero für wenige Euro), umd ein einfaches GPS-Modul genügen.
+* **Kostengünstige Hardware:** Ein kleiner RP2040-Mikrocontroller (z. B. RP2040-Zero für wenige Euro) und ein einfaches GPS-Modul genügen.
 * **Stabilisierung erforderlich:** Das System benötigt eine grundlegende Fluglagestabilisierung – entweder über den **optionalen MPU6050-Gyro** von oXs oder über einen **stabilisierten Empfänger** (z. B. FrSky S6R/S8R, Jeti Assist, Lemon RX etc.).
-* **Die Hauptsteuerung bleibt im Sender:** oXs greift **nicht** direkt in die Servos ein. Stattdessen sendet oXs lediglich eine Lenkempfehlung per Telemetrie (`GPS BEARING`) an den Sender. Alle Mischer, Servowege und der jederzeitige manuelle Eingriff über die Steuerknüppel bleiben sicher im Sender.
+* **Die Hauptsteuerung bleibt im Sender:** oXs greift **nicht** direkt in die Servos ein. Stattdessen sendet oXs lediglich eine Lenkempfehlung per Telemetrie (`GPS BEARING` / `YAW`) an den Sender. Alle Mischer, Servowege und der jederzeitige manuelle Eingriff über die Steuerknüppel bleiben sicher im Sender.
 * **Mischung von Seitenruder und Querruder:** Im Sender wird das RTH-Signal sanft auf das **Seitenruder** (und leicht auf das **Querruder** zur Unterstützung der Kurvenlage) gemischt, während der Stabi das Modell sauber in der Waage hält.
 * **Gefahrlos mit einem RC-Car erprobbar:** Da die Kursberechnung am Boden exakt genauso funktioniert wie in der Luft, kannst du die gesamte Technik vor dem Erstflug auf einem **einfachen RC-Car** montieren und Wirkrichtung sowie Kreisradius in Ruhe auf der Wiese oder dem Parkplatz testen.
 
@@ -25,7 +25,7 @@ Im Gegensatz zu ausgewachsenen Autopiloten (wie INAV oder ArduPilot) bleibt dies
 ## Hardware-Aufbau & Testträger
 
 ![Hardware Übersicht](/Aufbau.md)
-*Typischer Aufbau: RP2040-Zero, GPS-Modul .*
+*Typischer Aufbau: RP2040-Zero, GPS-Modul.*
 
 ![RC-Car Testträger](images/RTH_Car.jpg)
 *Gefahrloser Bodentest: Überprüfung von Kreisradius und Lenkrichtung auf einem RC-Car.*
@@ -94,27 +94,31 @@ Bestehende Werte lassen sich jederzeit anpassen und mehrere Befehle mit `;` komb
 ```text
 RTD=60; RTS=8; SAVE
 ```
+
+---
+
 ## Firmware aufspielen
 
-1. Lade die passende Firmware-Datei für dein System (z. B. **`RTH_CRSF.uf2`** für ELRS/CRSF) unter [config](https://github.com/Networker-001/oXs_on_RP2040-add-ons/tree/main/Config) herunter.
+1. Lade die passende Firmware-Datei für dein System (z. B. **`RTH_CRSF.uf2`** für ELRS/CRSF) unter [Config](https://github.com/tree/main/Config) herunter.
 2. Halte die **BOOT-Taste** auf dem RP2040-Board gedrückt, während du es per USB mit dem PC verbindest.
 3. Kopiere die heruntergeladene `.uf2`-Datei einfach auf das neu erscheinende Laufwerk `RPI-RP2`.
 4. Öffne **CoolTerm**, prüfe oder passe die Werte (wie `RTD` und `RTS`) an und speichere Änderungen mit `SAVE`.
+
 ---
 
-## Beispiel Einrichtung im Sender (EdgeTX / OpenTX)
+## Beispiel: Einrichtung im Sender (EdgeTX / OpenTX)
 
-oXs überträgt das Lenksignal über den Standard-Telemetriewert **`GPS Home Bearing` (`Bear`) oder im Feld `YAW bei CRSF`** im Bereich von `-180` bis `+180` (wobei **`0` genau Geradeaus / Neutral** entspricht). Parallel erfolgt die Übetragung im Sensor *YAW*
+oXs überträgt das Lenksignal über den Standard-Telemetriewert **`GPS Home Bearing` (`Bear`)** oder im Feld **`YAW` bei CRSF** im Bereich von `-180` bis `+180` (wobei **`0` genau Geradeaus / Neutral** entspricht). Parallel erfolgt die Übertragung im Sensor `YAW`.
 
 ### Schritt 1: Telemetriesignal zentrieren (Inputs)
 Lege einen neuen Input an (z. B. `I:RTH`):
 * **Quelle:** `YAW` (Telemetriesensor)
 * **Gewichtung:** `100%`
-* **Offset:** `0` *( auf exakt `0%` Knüppelmitte)*
+* **Offset:** `0` *(auf exakt `0%` Knüppelmitte)*
 
 ### Schritt 2: Auf Seiten- und Querruder mischen (Mischer)
 Füge in den Mischern für Seite und Quer jeweils eine Zeile hinzu, die über deinen **RTH-Schalter** aktiviert wird (Mischertyp: **Addieren**, damit deine Knüppel jederzeit Vorrang haben):
-* **Seitenruder:** `I:RTH` mit **`25%` bis `40%` Gewichtung** als Startwert beim Segler *(für RC-Car-Tests am Boden: `100%` bis `200%`)*.
+* **Seitenruder:** `I:RTH` mit **`25%` bis `40%` Gewichtung** als Startwert beim Segler *(für RC-Car-Tests am Boden: `30%`)*.
 * **Querruder (optional):** `I:RTH` mit **`10%` bis `20%` Gewichtung** für eine saubere Kurvenneigung ohne Schieben.
 * **Stabilisierung:** Stelle sicher, dass beim Einschalten von RTH gleichzeitig dein Stabi/Gyro aktiv ist.
 
@@ -125,8 +129,9 @@ Füge in den Mischern für Seite und Quer jeweils eine Zeile hinzu, die über de
 > Warte, bis im Telemetriefeld **`Sats`** ein **Wert ab `106`** angezeigt wird (Home-Position nach 9 Sekunden gespeichert), und gehe ca. `15–20 m` vom Startpunkt weg. Gehe zügig vorwärts, lege den RTH-Schalter um und prüfe, ob das Seitenruder so ausschlägt, dass das Modell eine **Rechtskurve** zurück zum Startpunkt einleitet. Lenkt es in die falsche Richtung, drehe einfach das Vorzeichen (`+` / `-`) bei der Mischer-Gewichtung um.
 
 ---
-### Optional: EdgeTX Farbdisplay-Widget (z. B. RadioMaster TX16S)
 
-Für EdgeTX-Sender mit Farbdisplay (wie die RadioMaster TX16S, TX12 MKII Color, Boxer Color etc.) steht ein passendes **GPS Homer Widget** zur Verfügung, das die aktuelle Position, Richtung und Entfernung zum Home-Punkt übersichtlich auf dem Sender-Bildschirm anzeigt:
+### Optional: EdgeTX Farbdisplay-Widget (z. B. RadioMaster TX16S / TX18S)
 
-* **Widget-Download & Anleitung:** **[EdgeTX GPS Homer Widget (Networker-001/Widgets)](https://github.com/Networker-001/Widgets/tree/main/EdgeTX/GPS%20Homer)**
+Für EdgeTX-Sender mit Farbdisplay steht ein passendes **GPS Homer Widget** zur Verfügung, das die aktuelle Position, Flugrichtung und Entfernung zum Home-Punkt übersichtlich auf dem Sender-Bildschirm anzeigt:
+
+* **Widget-Download & Anleitung:** **[EdgeTX GPS Homer Widget (Networker-001/Widgets)](https://github.com)**
