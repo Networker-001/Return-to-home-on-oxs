@@ -9,7 +9,7 @@ A simple, **low-cost Return-to-Home (RTH) system** based on the **Raspberry Pi R
 > **[Networker-001/oXs_on_RP2040-add-ons](https://github.com/Networker-001/oXs_on_RP2040-add-ons)**
 >
 > The `FrSky_2_CRSF.uf2` file for this project can be found in the Config folder:  
-> **[Networker-001/oXs_on_RP2040-add-ons/Config](https://github.com/Networker-001/oXs_on_RP2040-add-ons/Config)**
+> **[Networker-001/oXs_on_RP2040-add-ons/Config](https://github.com/Networker-001/oXs_on_RP2040-add-ons/tree/main/Config))**
 
 ---
 
