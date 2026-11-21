@@ -134,4 +134,4 @@ Add a mixer line controlled by your **RTH Switch** (using **Multiplex: Add** so 
 
 For EdgeTX transmitters equipped with a color display, a dedicated **GPS Homer Widget** is available to visualize your model's position, heading, and distance relative to the Home point directly on your radio screen:
 
-* **Widget Download & Setup:** **[EdgeTX GPS Homer Widget (Networker-001/Widgets)](https://github.com)**
+* **Widget-Download & Setup:** **[EdgeTX GPS Homer Widget](https://github.com/Networker-001/Widgets/tree/main/EdgeTX/GPS%20Homer)**
