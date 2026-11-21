@@ -134,4 +134,4 @@ Füge in den Mischern für Seite und Quer jeweils eine Zeile hinzu, die über de
 
 Für EdgeTX-Sender mit Farbdisplay steht ein passendes **GPS Homer Widget** zur Verfügung, das die aktuelle Position, Flugrichtung und Entfernung zum Home-Punkt übersichtlich auf dem Sender-Bildschirm anzeigt:
 
-* **Widget-Download & Anleitung:** **[EdgeTX GPS Homer Widget (Networker-001/Widgets)](https://github.com)**
+* **Widget-Download & Anleitung:** **[EdgeTX GPS Homer Widget](https://github.com/Networker-001/Widgets/tree/main/EdgeTX/GPS%20Homer)**
