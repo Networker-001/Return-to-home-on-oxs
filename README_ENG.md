@@ -6,7 +6,7 @@ A simple, **low-cost Return-to-Home (RTH) system** based on the **Raspberry Pi R
 
 > **Source Code Repository:**  
 > The full source code is maintained in the central project repository:  
-> **[Networker-001/oXs_on_RP2040-add-ons](https://github.com)**
+> **[Networker-001/oXs_on_RP2040-add-ons](https://github.com/Networker-001/oXs_on_RP2040-add-ons)**
 
 ---
 
@@ -99,10 +99,10 @@ RTD=60; RTS=8; SAVE
 
 ## Installing the Firmware
 
-1. Download the matching firmware file for your radio protocol (e.g., **`RTH_CRSF.uf2`** for ELRS/CRSF) from the [Config](https://github.com/tree/main/Config) folder.
-2. Hold the **BOOT** button on the RP2040 board while connecting it to your PC via USB.
-3. Copy the downloaded `.uf2` file onto the `RPI-RP2` drive that appears.
-4. Open **CoolTerm**, check or customize your parameters (such as `RTD` and `RTS`), and save changes with `SAVE`.
+1. Download the matching firmware file for your radio protocol (e.g., **`RTH_CRSF.uf2`** for ELRS/CRSF) from the [`Config`](https://github.com/Networker-001/oXs_on_RP2040-add-ons/tree/main/Config) folder.
+3. Hold the **BOOT** button on the RP2040 board while connecting it to your PC via USB.
+4. Copy the downloaded `.uf2` file onto the `RPI-RP2` drive that appears.
+5. Open **CoolTerm**, check or customize your parameters (such as `RTD` and `RTS`), and save changes with `SAVE`.
 
 ---
 
