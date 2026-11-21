@@ -6,7 +6,7 @@ A simple, **low-cost Return-to-Home (RTH) system** based on the **Raspberry Pi R
 
 > **Source Code Repository:**  
 > The full source code is maintained in the central project repository:  
-> **[Networker-001/oXs_on_RP2040-add-ons](https://github.com/Networker-001/oXs_on_RP2040-add-ons)**
+> **[Networker-001/oXs_on_RP2040-add-ons](https://github.com)**
 
 ---
 
@@ -14,9 +14,9 @@ A simple, **low-cost Return-to-Home (RTH) system** based on the **Raspberry Pi R
 
 Unlike full autopilots (such as INAV or ArduPilot), this RTH extension keeps things intentionally simple and transparent:
 
-* **Low-Cost Hardware:** Built on a tiny RP2040 board (e.g., RP2040-Zero) paired with a standard GPS module and an optional MPU6050 gyro sensor.
-* **Stabilization Required:** The system relies on basic flight stabilization (either using the built-in **MPU6050 gyro** of oXs or a **stabilized receiver**).
-* **Full Control Stays in Your Transmitter:** oXs does **not** take over your servos directly. Instead, it sends a simple steering recommendation via telemetry (`HEADING`) to your radio. All mixing, limits, and manual stick overrides remain safely in your transmitter.
+* **Low-Cost Hardware:** Built on a tiny RP2040 board (e.g., RP2040-Zero) paired with a standard GPS module.
+* **Stabilization Required:** The system relies on basic flight stabilization (either using the **optional MPU6050 gyro** of oXs or a **stabilized receiver** such as FrSky S6R/S8R, Jeti Assist, Lemon RX, etc.).
+* **Full Control Stays in Your Transmitter:** oXs does **not** take over your servos directly. Instead, it sends a simple steering recommendation via telemetry (`GPS BEARING` / `YAW`) to your radio. All mixing, limits, and manual stick overrides remain safely in your transmitter.
 * **Rudder & Aileron Mixing for Clean Turns:** In your transmitter, the RTH signal is gently mixed onto **Rudder** (and lightly onto **Aileron** for coordinated turns) while the gyro keeps the wings level and maintains pitch.
 * **Easy & Safe Testing with an RC Car:** Because the guidance logic works identically in 2D, you can mount the hardware on a **standard RC car** and test all settings, directions, and circle radii safely on the ground before your first flight.
 
@@ -24,7 +24,7 @@ Unlike full autopilots (such as INAV or ArduPilot), this RTH extension keeps thi
 
 ## Hardware Setup & Test Platform
 
-![Hardware Overview](images/setup_overview.jpg)
+![Hardware Overview](/Aufbau.md)
 *Typical setup: RP2040-Zero, GPS module.*
 
 ![RC Car Testbed](images/RTH_Car.jpg)
@@ -34,7 +34,7 @@ Unlike full autopilots (such as INAV or ArduPilot), this RTH extension keeps thi
 
 ## How It Works in Practice
 
-![Flight Path](images/approach.jpg)
+![Flight Path Diagram](images/approach.jpg)
 *The model approaches the Home circle on a straight tangent line and smoothly enters a clockwise orbit.*
 
 1. **Automatic Home Lock (`Sats` Telemetry Status):** After powering on, oXs monitors GPS reception and indicates the current lock status by adding an offset to the **`Sats`** telemetry field:
@@ -86,39 +86,39 @@ You can adjust existing settings at any time and separate multiple commands with
 | `PRI=<Pin>` | RC channel input from receiver | Only needed if oXs also drives servos or the onboard gyro (otherwise disabled) |
 | `GPS_TX=<Pin>` | TX pin to GPS module (connect to GPS RX) | Default: `28` (GPIO 28) |
 | `GPS_RX=<Pin>` | RX pin from GPS module (connect to GPS TX) | Default: `29` (GPIO 29) |
-| `RTD=<meters>` | **Target Orbit Radius** around Home | RC Car (Test): `3`–`5` m \| Glider / Plane: `100`–`150` m |
-| `RTS=<km/h>` | **Minimum Speed** for steering updates | RC Car (Test): `1`–`3` km/h \| Glider / Plane: `5`–`12` km/h |
+| `RTD=<meters>` | **Target Orbit Radius** around Home | RC Car (Test): `3`–`5` m \| Glider / Plane: `60`–`80` m |
+| `RTS=<km/h>` | **Minimum Speed** for steering updates | RC Car (Test): `1`–`3` km/h \| Glider / Plane: `3`–`12` km/h |
 | `SAVE` | **Save all settings permanently** | Power cycle or reset the RP2040 after sending `SAVE` |
 
-**Example of a customization in the terminal (e.g., glider with 120 m radius and 8 km/h minimum speed):**
+**Example of a customization in the terminal (e.g., glider with 60 m radius and 8 km/h minimum speed):**
 ```text
-RTD=120; RTS=8; SAVE
+RTD=60; RTS=8; SAVE
 ```
 
 ---
 
 ## Installing the Firmware
 
-1. Download the matching firmware file for your radio protocol (e.g., **`RTH_CRSF.uf2`** for ELRS/CRSF) from the [config](https://github.com/Networker-001/oXs_on_RP2040-add-ons/tree/main/config) page.
+1. Download the matching firmware file for your radio protocol (e.g., **`RTH_CRSF.uf2`** for ELRS/CRSF) from the [Config](https://github.com/tree/main/Config) folder.
 2. Hold the **BOOT** button on the RP2040 board while connecting it to your PC via USB.
 3. Copy the downloaded `.uf2` file onto the `RPI-RP2` drive that appears.
 4. Open **CoolTerm**, check or customize your parameters (such as `RTD` and `RTS`), and save changes with `SAVE`.
 
 ---
 
-## Transmitter Setup (EdgeTX / OpenTX)
+## Example: Transmitter Setup (EdgeTX / OpenTX)
 
-oXs transmits the steering command through the standard **`HEADING` (`Hdg`)** telemetry sensor (`0` to `100`, where **`50.0` is neutral / straight ahead**).
+oXs transmits the steering command through the standard **`GPS Home Bearing` (`Bear`)** telemetry value—or in the **`YAW`** field when using CRSF—covering a range from `-180` to `+180` (where **`0` is neutral / straight ahead**). Transmission occurs in parallel via the `YAW` sensor.
 
-### Step 1: Center the Telemetry Signal (Input)
+### Step 1: Center the Telemetry Signal (Inputs)
 Create a new Input (e.g., `I:RTH`):
-* **Source:** `Hdg` (Telemetry sensor)
+* **Source:** `YAW` (telemetry sensor)
 * **Weight:** `100%`
-* **Offset:** `-50%` *(Turns `50.0` neutral into exact `0%` stick center)*
+* **Offset:** `0` *(centered at exact `0%` stick neutral)*
 
 ### Step 2: Mix onto Rudder & Aileron (Mixer)
 Add a mixer line controlled by your **RTH Switch** (using **Multiplex: Add** so your sticks always override the RTH):
-* **Rudder Channel:** Add `I:RTH` with **`25%` to `40%` weight** as a safe starting value for gliders *(for RC car ground testing: `100%` to `200%`)*.
+* **Rudder Channel:** Add `I:RTH` with **`25%` to `40%` weight** as a starting value for gliders *(for RC car ground testing: `30%`)*.
 * **Aileron Channel (optional):** Add `I:RTH` with **`10%` to `20%` weight** to support smooth, coordinated banking into the turn.
 * **Stabilization:** Make sure your gyro stabilization mode is active whenever RTH is switched on.
 
@@ -128,10 +128,10 @@ Add a mixer line controlled by your **RTH Switch** (using **Multiplex: Add** so 
 > **Important Direction Check Before Takeoff:**  
 > Wait until the **`Sats`** telemetry field shows a **value of `106` or higher** (Home point saved after 9 seconds), then walk about `15–20 m` away from your starting point. Walk forward at a brisk pace, flip the RTH switch, and check that the rudder deflects to steer the model in a **clockwise** turn back toward Home. If it steers the wrong way, simply invert the `+` / `-` sign of the mixer weight.
 
-### Optional: EdgeTX Color Screen Widget (e.g., RadioMaster TX16S)
+---
 
-For EdgeTX transmitters equipped with a color display (such as the RadioMaster TX16S), a dedicated **GPS Homer Widget** is available to visualize your model's position, heading, and distance relative to the Home point directly on your radio screen:
+### Optional: EdgeTX Color Screen Widget (e.g., RadioMaster TX16S / TX18S)
 
-* **Widget Download & Setup:** **[EdgeTX GPS Homer Widget (Networker-001/Widgets)](https://github.com/Networker-001/Widgets/tree/main/EdgeTX/GPS%20Homer)**
+For EdgeTX transmitters equipped with a color display, a dedicated **GPS Homer Widget** is available to visualize your model's position, heading, and distance relative to the Home point directly on your radio screen:
 
-
+* **Widget Download & Setup:** **[EdgeTX GPS Homer Widget (Networker-001/Widgets)](https://github.com)**
