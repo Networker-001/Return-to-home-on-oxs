@@ -67,7 +67,7 @@ Die hier bereitgestellten Firmware-Dateien sind bereits nach dem jeweiligen Empf
 
 ## Komplette Konfiguration am PC (USB-Terminal)
 
-Für Anpassungen über USB empfehlen wir das kostenlose und einsteigerfreundliche Programm **[CoolTerm](https://the-meiers.org)** (verfügbar für Windows, macOS und Linux). Es erfordert keine Installation und ermöglicht das bequeme Einfügen von Befehlen per Kopieren und Einfügen.
+Für Anpassungen über USB empfiehlt sich das kostenlose und einsteigerfreundliche Programm **[CoolTerm](https://the-meiers.org)** (verfügbar für Windows, macOS und Linux). Es erfordert keine Installation und ermöglicht das bequeme Einfügen von Befehlen per Kopieren und Einfügen.
 
 ### Kurzanleitung für CoolTerm
 1. Verbinde den RP2040 per USB-Kabel mit dem PC und starte **CoolTerm**.
@@ -104,12 +104,12 @@ RTD=60; RTS=8; SAVE
 
 ## Beispiel Einrichtung im Sender (EdgeTX / OpenTX)
 
-oXs überträgt das Lenksignal über den Standard-Telemetriewert **`GPS Home Bearing` (`Bear`) oder im Feld Roll bei CRSF** im Bereich von `-180` bis `+180` (wobei **`0` genau Geradeaus / Neutral** entspricht). Parallel erfolgt die Übetragung im Sensor *Roll*
+oXs überträgt das Lenksignal über den Standard-Telemetriewert **`GPS Home Bearing` (`Bear`) oder im Feld `YAW bei CRSF`** im Bereich von `-180` bis `+180` (wobei **`0` genau Geradeaus / Neutral** entspricht). Parallel erfolgt die Übetragung im Sensor *YAW*
 
 ### Schritt 1: Telemetriesignal zentrieren (Inputs)
 Lege einen neuen Input an (z. B. `I:RTH`):
-* **Quelle:** `Roll` (Telemetriesensor)
-* **Gewichtung:** `30%`
+* **Quelle:** `YAW` (Telemetriesensor)
+* **Gewichtung:** `100%`
 * **Offset:** `0` *( auf exakt `0%` Knüppelmitte)*
 
 ### Schritt 2: Auf Seiten- und Querruder mischen (Mischer)
